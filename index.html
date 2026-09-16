@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Museum of Us — Friendship</title>
+<style>
+:root{--ink:#342d39;--paper:#fffaf4;--pink:#f3b7c8;--rose:#c96f91;--gold:#c59b55;--card:#fff;--shadow:0 18px 50px #4b354020}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#fff 0,#fff7ef 45%,#f7e8dc 100%);color:var(--ink);font-family:Georgia,serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{min-height:100vh;padding:22px 14px 50px}.shell{max-width:760px;margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-family:system-ui,sans-serif}
+.badge{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a6472}
+.progress{height:5px;background:#eadbd5;border-radius:9px;overflow:hidden;margin-bottom:28px}.progress i{display:block;height:100%;background:linear-gradient(90deg,#d77d9a,#c9a35c);transition:.35s;width:14%}
+.panel{background:#fffdfb;border:1px solid #eaded7;border-radius:28px;padding:28px;box-shadow:var(--shadow)}
+h1{font-size:clamp(34px,8vw,62px);line-height:.98;margin:8px 0 16px;letter-spacing:-.035em}h2{font-size:clamp(27px,6vw,42px);margin:8px 0 12px}p{line-height:1.6;color:#655964}
+.eyebrow{font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9c7080}
+.field{margin:18px 0}.field label{display:block;font-family:system-ui,sans-serif;font-size:13px;margin-bottom:8px;color:#6f626a}
+input,textarea,select{width:100%;padding:14px 15px;border:1px solid #ddcfca;border-radius:15px;background:#fff;color:var(--ink);outline:none}textarea{min-height:145px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.choice{padding:15px;border:1px solid #ded0cc;border-radius:17px;background:#fff;text-align:left;transition:.2s}.choice:hover,.choice.on{border-color:#c77793;background:#fff0f4;transform:translateY(-1px)}
+.choice b{display:block}.choice small{display:block;color:#7a6d74;margin-top:4px}
+.actions{display:flex;gap:10px;margin-top:24px}.actions button{flex:1}.primary{background:#342d39;color:#fff;padding:14px 18px;border-radius:15px}.secondary{background:#f0e7e2;color:#4b3f47;padding:14px 18px;border-radius:15px}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.photo{position:relative;border:1px dashed #cdbcb4;border-radius:18px;overflow:hidden;min-height:150px;background:#fff}.photo img{width:100%;height:180px;object-fit:cover;display:block}.photo .cap{padding:9px}.photo input{border:0;border-radius:0;border-top:1px solid #eee}.tag{position:absolute;top:8px;left:8px;background:#fff;padding:6px 8px;border-radius:99px;font:12px system-ui;box-shadow:0 4px 12px #0001}
+.upload{display:block;border:1px dashed #cdbcb4;padding:24px;border-radius:18px;text-align:center;margin:14px 0;color:#766871}
+.hidden{display:none!important}.center{text-align:center}.museum{background:linear-gradient(#251e25,#3b2b31);color:#fff;border-radius:28px;padding:25px;min-height:620px;box-shadow:0 25px 70px #0004}.museum p{color:#eadde1}.door{margin:35px auto;width:min(310px,80%);height:270px;border:8px solid #b99155;border-radius:150px 150px 22px 22px;background:linear-gradient(90deg,#38262d,#563740,#38262d);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 50px #0008}.ring{width:62px;height:62px;border:4px solid #d6b16f;border-radius:50%;display:grid;place-items:center;background:#241a20;color:#f4d38c;font-size:25px}
+.room{display:none;animation:fade .35s ease}.room.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.note{background:#fff8e8;color:#493a34;padding:18px;border-radius:12px;margin:10px 0;box-shadow:0 5px 16px #0002;cursor:pointer}.note.reveal{background:#f8dfe8}.letter{background:#fff4f8;color:#493a42;border-radius:18px;padding:24px;min-height:180px}.seal{width:70px;height:70px;border-radius:50%;background:#b95d79;color:#fff;display:grid;place-items:center;margin:30px auto;font-size:25px}
+.rules label{display:block;background:#fff;padding:12px;border-radius:12px;margin:8px 0}.rules input{width:auto;margin-right:9px}.certificate{background:#fffaf0;color:#4a3a35;padding:28px;border:7px double #c59b55;text-align:center}.cert-name{font-size:34px}.small{font:13px system-ui;color:#84747c}.counter{font:48px system-ui;font-weight:700;text-align:center;color:#f0c986}
+canvas{display:block;width:100%;height:auto;max-width:100%;border-radius:18px;background:#fff;touch-action:none;border:1px solid #d9c8bf}.sign-wrap{background:#fff;border-radius:20px;padding:14px;margin:18px 0;box-shadow:inset 0 0 0 1px #eaded7}.sign-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font:13px system-ui;color:#6f626a}.sign-line{border-bottom:2px solid #cdbcb4;margin:0 18px 10px}.music-toggle{position:fixed;right:18px;bottom:18px;z-index:20;border-radius:999px;padding:11px 15px;background:#fff;color:#342d39;box-shadow:0 8px 25px #0004;font:14px system-ui}.music-toggle.off{opacity:.72}
+@media(max-width:560px){.panel{padding:20px;border-radius:22px}.grid,.photo-grid{grid-template-columns:1fr}.actions{flex-direction:column}h1{font-size:43px}}
+</style>
+</head>
+<body>
+<div class="app"><div class="shell">
+<div class="top"><div class="badge">PREVIEW · Museum of Us</div><div id="stepLabel" class="small">Step 1 of 7</div></div>
+<div class="progress"><i id="bar"></i></div>
+<div id="builder"></div>
+</div></div>
+<script>
+const S={friend:"",me:"",type:"Bestie",vibe:"Chaotic & loud",date:"",reasons:[],photos:[],message:"",music:null,stamp:"💛",sticker:"🤗",rules:[]};
+const defaultReasons=["You never let me spiral alone","You laugh at my worst jokes","You show up. Every single time.","You know all my stories","You tell me when I am being an idiot","You have seen me at my worst","You make boring days fun"];
+const defaultRules=["Reply to my texts within one business week","Show up when it matters, without being asked","Split the last slice, always","Roast me in private, defend me in public","Never let me face the hard stuff alone"];
+let step=1, museumRoom=0, puzzleImg=null;
+
+function render(){document.getElementById("stepLabel").textContent=`Step ${step} of 7`;document.getElementById("bar").style.width=(step/7*100)+"%"; const b=document.getElementById("builder"); b.innerHTML=steps[step-1](); bind();}
+function actions(back=true){return `<div class="actions">${back?'<button class="secondary" id="back">← Back</button>':''}<button class="primary" id="next">${step===7?'👀 Take a look inside':'Next →'}</button></div>`}
+const steps=[
+()=>`<div class="panel"><div class="eyebrow">OurMoments-style friendship experience</div><h1>Build your best friend a museum.</h1><p>You are about to make someone’s day unforgettable. Everything below stays in this browser for this demo.</p>
+<div class="field"><label>Who is this for?</label><input id="friend" placeholder="Your friend's name" value="${S.friend}"></div><div class="field"><label>And what's your name?</label><input id="me" placeholder="Your name" value="${S.me}"></div>
+<button class="primary" id="start" style="width:100%">Start building →</button><p class="small center">Works on phones · no account needed · demo version</p></div>`,
+()=>`<div class="panel"><div class="eyebrow">Step 2 · About them</div><h2>What kind of friend are they?</h2><p>Pick the one that fits them best.</p><div class="grid">${["Bestie|💛","Childhood|🧒","College crew|🎓","Work bestie|💼","Sibling-coded|🏠","Online friend|🌐"].map(x=>{let[a,e]=x.split("|");return `<button class="choice ${S.type===a?'on':''}" data-type="${a}">${e} <b>${a}</b></button>`}).join("")}</div>
+<div class="field"><label>When did you two become friends? — optional</label><input id="date" type="date" value="${S.date}"></div>${actions()}</div>`,
+()=>`<div class="panel"><div class="eyebrow">Step 3 · Your vibe & little notes</div><h2>How are you two together?</h2><p>This sets the mood of the museum.</p><div class="grid">${["Chaotic & loud|🤪|Screaming, memes, zero volume control","Calm & deep|🌱|3am talks and comfortable silences","Roast first, love later|😈|Insults are our love language","Ride or die|🛡️|One call and I am already there"].map(x=>{let[a,e,d]=x.split("|");return `<button class="choice ${S.vibe===a?'on':''}" data-vibe="${a}">${e}<b>${a}</b><small>${d}</small></button>`}).join("")}</div>
+<p><b>Why they matter to you</b> — pick up to 5.</p><div class="grid">${defaultReasons.map(r=>`<button class="choice reason ${S.reasons.includes(r)?'on':''}" data-reason="${r}">${r}</button>`).join("")}</div>
+<div class="field"><input id="customReason" placeholder="Write your own…"></div>${actions()}</div>`,
+()=>`<div class="panel"><div class="eyebrow">Step 4 · Your photos</div><h2>Add your favourite photos.</h2><p>Up to 4. One becomes a simple tile-swap puzzle.</p><label class="upload">📸 Tap to add photos<input id="files" type="file" accept="image/*" multiple class="hidden"></label><div id="photos" class="photo-grid">${S.photos.map((p,i)=>`<div class="photo"><span class="tag">${i===0?'🧩 Puzzle':''}</span><img src="${p.url}"><input data-cap="${i}" placeholder="Caption" value="${p.caption||''}"></div>`).join("")}</div><div class="field"><label>Puzzle difficulty</label><select id="difficulty"><option>Easy · 9 pieces</option><option>Hard · 16 pieces</option></select></div>${actions()}</div>`,
+()=>`<div class="panel"><div class="eyebrow">Step 5 · Your message</div><h2>Write them a message.</h2><p>It arrives sealed inside an envelope. Say the thing you don't say out loud.</p><textarea id="message" maxlength="2000" placeholder="Write something from the heart…">${S.message}</textarea><div class="small" id="count">${S.message.length} / 2000</div><div class="field"><label>🎵 Add music for the museum</label><p class="small">Upload an audio file you have permission to use. For “Blue”, use your own licensed copy rather than bundling the copyrighted recording.</p><input id="music" type="file" accept="audio/*"></div><div class="field"><label>Pick a stamp</label><div class="grid">${["💛","🤝","⭐","🔥","♾️"].map(x=>`<button class="choice ${S.stamp===x?'on':''}" data-stamp="${x}">${x}</button>`).join("")}</div></div><div class="field"><label>Pick a sticker</label><div class="grid">${["🤗","🥳","🥹","😎","😻"].map(x=>`<button class="choice ${S.sticker===x?'on':''}" data-sticker="${x}">${x}</button>`).join("")}</div></div>${actions()}</div>`,
+()=>`<div class="panel"><div class="eyebrow">Step 6 · Your friendship rules</div><h2>Set your friendship rules.</h2><p>At the end, your friend ticks them and signs.</p><div class="rules">${defaultRules.map(r=>`<label><input type="checkbox" data-rule="${r}" ${S.rules.includes(r)?'checked':''}>${r}</label>`).join("")}</div><div class="field"><input id="customRule" placeholder="Write your own rule…"></div>${actions()}</div>`,
+()=>`<div class="panel center"><div class="eyebrow">Step 7 · Have a look</div><h2>It's ready.</h2><p>Try the museum yourself first. This is the experience your friend will see.</p><div class="certificate"><div class="small">THE MUSEUM OF US</div><div class="cert-name">${S.friend||"Your friend"}</div><p>made with ridiculous amounts of friendship by<br><b>${S.me||"you"}</b></p>🤝</div><div class="actions"><button class="secondary" id="back">← Change something</button><button class="primary" id="preview">👀 Take a look inside</button></div></div>`
+];
+
+function bind(){
+ document.querySelectorAll("[data-type]").forEach(x=>x.onclick=()=>{S.type=x.dataset.type;render()});
+ document.querySelectorAll("[data-vibe]").forEach(x=>x.onclick=()=>{S.vibe=x.dataset.vibe;render()});
+ document.querySelectorAll(".reason").forEach(x=>x.onclick=()=>{let r=x.dataset.reason;if(S.reasons.includes(r))S.reasons=S.reasons.filter(a=>a!==r);else if(S.reasons.length<5)S.reasons.push(r);render()});
+ document.querySelectorAll("[data-stamp]").forEach(x=>x.onclick=()=>{S.stamp=x.dataset.stamp;render()});
+ document.querySelectorAll("[data-sticker]").forEach(x=>x.onclick=()=>{S.sticker=x.dataset.sticker;render()});
+ document.querySelectorAll("[data-rule]").forEach(x=>x.onchange=()=>{let r=x.dataset.rule;if(x.checked)S.rules.push(r);else S.rules=S.rules.filter(a=>a!==r)});
+ const f=id=>document.getElementById(id);
+ if(f("friend"))f("friend").oninput=e=>S.friend=e.target.value;
+ if(f("me"))f("me").oninput=e=>S.me=e.target.value;
+ if(f("date"))f("date").oninput=e=>S.date=e.target.value;
+ if(f("message")){f("message").oninput=e=>{S.message=e.target.value;f("count").textContent=S.message.length+" / 2000"}}
+ if(f("music"))f("music").onchange=e=>{const file=e.target.files[0];if(file)S.music=URL.createObjectURL(file)}
+ if(f("files"))f("files").onchange=async e=>{for(const file of [...e.target.files].slice(0,4-S.photos.length)){S.photos.push({url:URL.createObjectURL(file),caption:""})}render()};
+ document.querySelectorAll("[data-cap]").forEach(x=>x.oninput=e=>S.photos[+x.dataset.cap].caption=e.target.value);
+ if(f("start"))f("start").onclick=()=>{if(!S.friend||!S.me)return alert("Add both names first 🙂");step=2;render()};
+ if(f("back"))f("back").onclick=()=>{step=Math.max(1,step-1);render()};
+ if(f("next"))f("next").onclick=()=>{if(step===3){let c=f("customReason")?.value.trim();if(c&&!S.reasons.includes(c)&&S.reasons.length<5)S.reasons.push(c)};if(step===6){let c=f("customRule")?.value.trim();if(c&&!S.rules.includes(c)&&S.rules.length<5)S.rules.push(c)};if(step<7){step++;render()}else openMuseum()};
+ if(f("preview"))f("preview").onclick=openMuseum;
+}
+function openMuseum(){museumRoom=0;hasInk=false;const museumRuleList=S.rules.length?S.rules:defaultRules;document.querySelector(".app").innerHTML=`<div class="shell"><div class="museum">
+<div class="top"><div class="badge" style="color:#d9c2c9">THE MUSEUM OF US</div><button class="secondary" id="exit" style="padding:8px 12px">← Edit</button></div>
+${S.music?`<audio id="bgMusic" src="${S.music}" loop preload="auto"></audio><button class="music-toggle" id="musicToggle">♫ Music</button>`:""}<div id="rooms">
+<section class="room active" data-room="0"><div class="eyebrow">One visitor only</div><h1>Someone built you a museum.</h1><p>Knock three times. That's the rule.</p><div class="door"><div class="ring" id="knock">✦</div></div><p class="center">Tap the brass ring to enter.</p></section>
+<section class="room" data-room="1"><div class="eyebrow">Room 1 · The entrance</div><h2>First, your friendship band.</h2><p>This one was made for you.</p><div class="counter">${S.stamp}</div><button class="primary" onclick="nextRoom()">Tie it on 🤝</button></section>
+<section class="room" data-room="2"><div class="eyebrow">Room 2 · The gallery</div><h2>Our photos</h2><p>Tap a photo to reveal it.</p><div id="gallery"></div><button class="primary" onclick="nextRoom()">Keep walking →</button></section>
+<section class="room" data-room="3"><div class="eyebrow">Room 3 · The restoration desk</div><h2>This photo fell apart.</h2><p>Tap two tiles to swap them. Put the picture back together.</p><div id="puzzle"></div><button class="secondary" onclick="nextRoom()">Skip puzzle</button></section>
+<section class="room" data-room="4"><div class="eyebrow">Room 4 · The note wall</div><h2>What they love about you</h2><div id="notes"></div><button class="primary" onclick="nextRoom()">Open the reading room →</button></section>
+<section class="room" data-room="5"><div class="eyebrow">Room 5 · The reading room</div><h2>A letter, sealed just for you.</h2><div class="letter"><div class="seal" id="seal">${S.stamp}</div><div id="letterText" class="hidden">${escapeHtml(S.message||"You are genuinely one of the best people I know. Thanks for all the chaos, laughs and memories. 🤝")}</div></div><button class="primary" id="breakSeal">Tap to break the seal</button><button class="secondary" onclick="nextRoom()">One last room →</button></section>
+<section class="room" data-room="6"><div class="eyebrow">Room 6 · The promises</div><h2>Make it official.</h2><p>Tick every promise, then draw your signature below. Use your finger on a phone or your mouse on a computer.</p><div class="rules" id="museumRules">${museumRuleList.map(r=>`<label><input type="checkbox">${escapeHtml(r)}</label>`).join("")}</div><div class="sign-wrap"><div class="sign-head"><span>✍️ Your signature</span><button class="secondary" id="clearSign" style="padding:7px 11px">Clear</button></div><canvas id="sign" width="900" height="260" aria-label="Signature pad"></canvas><div class="sign-line"></div><div class="small center">Sign inside the box above</div></div><button class="primary" id="finish">Seal the friendship 🤝</button></section>
+<section class="room" data-room="7"><div class="eyebrow">All of that was for you.</div><div class="certificate"><div class="small">CERTIFICATE OF FRIENDSHIP</div><h2>${escapeHtml(S.friend||"You")} & ${escapeHtml(S.me||"Me")}</h2><p>Renewed indefinitely, with no option to cancel.</p><div style="font-size:55px">🤝</div><p>Signed by the visitor</p></div><p class="center">Nobody else has this little museum. It was made by hand, for one person — you.</p><button class="primary" id="again">Build another museum</button></section>
+</div></div></div>`;
+setupMuseum()}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function setupMuseum(){
+ const bg=document.getElementById("bgMusic");
+ if(bg){
+   bg.volume=0;
+   const toggle=document.getElementById("musicToggle");
+   let musicOn=true;
+   const fadeIn=()=>{bg.play().then(()=>{let v=0;const timer=setInterval(()=>{v=Math.min(.35,v+.035);bg.volume=v;if(v>=.35)clearInterval(timer)},70)}).catch(()=>{musicOn=false;toggle.classList.add("off");toggle.textContent="♫ Music off"})};
+   fadeIn();
+   toggle.onclick=()=>{if(bg.paused){musicOn=true;bg.volume=.18;bg.play();toggle.classList.remove("off");toggle.textContent="♫ Music"}else{bg.pause();musicOn=false;toggle.classList.add("off");toggle.textContent="♫ Music off"}};
+ }
+ document.getElementById("exit").onclick=()=>{step=7;render()};
+ document.getElementById("knock").onclick=()=>nextRoom();
+ const g=document.getElementById("gallery");if(S.photos.length){S.photos.forEach(p=>{let d=document.createElement("div");d.className="note";d.innerHTML=`<img src="${p.url}" style="width:100%;border-radius:10px;filter:blur(18px);transition:.5s"><div>${escapeHtml(p.caption||"A favourite memory")}</div>`;d.onclick=()=>d.querySelector("img").style.filter="none";g.appendChild(d)})}else g.innerHTML='<div class="note">No photos added yet — imagine your favourite memory here. 📸</div>';
+ setupPuzzle();const n=document.getElementById("notes");(S.reasons.length?S.reasons:defaultReasons.slice(0,4)).forEach(r=>{let d=document.createElement("div");d.className="note";d.textContent="Tap to open ✦";d.onclick=()=>{d.classList.add("reveal");d.textContent=r};n.appendChild(d)});
+ document.getElementById("breakSeal").onclick=()=>{document.getElementById("seal").classList.add("hidden");document.getElementById("letterText").classList.remove("hidden");document.getElementById("breakSeal").classList.add("hidden")};
+ setupSign();document.getElementById("finish").onclick=()=>{if([...document.querySelectorAll("#museumRules input")].every(x=>x.checked)&&hasInk)nextRoom();else alert("Tick every promise and sign below ✍️")};
+ document.getElementById("again").onclick=()=>{location.reload()};
+}
+function setupPuzzle(){let p=S.photos[0];let box=document.getElementById("puzzle");if(!p){box.innerHTML='<div class="note">Add a photo in the builder to unlock the puzzle.</div>';return}let pieces=Array.from({length:9},(_,i)=>i);pieces.sort(()=>Math.random()-.5);box.innerHTML='<div id="tiles" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px"></div>';let tiles=document.getElementById("tiles"),sel=null;pieces.forEach(i=>{let d=document.createElement("button");d.style.cssText=`height:95px;border-radius:4px;background-image:url(${p.url});background-size:300% 300%;background-position:${(i%3)*50}% ${Math.floor(i/3)*50}%;border:1px solid #ffffff44`;d.onclick=()=>{if(sel===null){sel=d}else{let bg=sel.style.backgroundPosition;sel.style.backgroundPosition=d.style.backgroundPosition;d.style.backgroundPosition=bg;sel=null}};tiles.appendChild(d)})}
+let hasInk=false;
+function setupSign(){
+ const c=document.getElementById("sign"),ctx=c.getContext("2d"); let down=false;
+ ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";
+ function pos(e){const r=c.getBoundingClientRect();return {x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+ c.addEventListener("pointerdown",e=>{e.preventDefault();down=true;hasInk=true;c.setPointerCapture(e.pointerId);const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)});
+ c.addEventListener("pointermove",e=>{if(!down)return;e.preventDefault();const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()});
+ const end=e=>{down=false;try{c.releasePointerCapture(e.pointerId)}catch(_){}};
+ c.addEventListener("pointerup",end);c.addEventListener("pointercancel",end);c.addEventListener("pointerleave",()=>{if(!down)return});
+ document.getElementById("clearSign").onclick=()=>{ctx.clearRect(0,0,c.width,c.height);hasInk=false};
+}
+function nextRoom(){museumRoom++;document.querySelectorAll(".room").forEach((x,i)=>x.classList.toggle("active",i===museumRoom));window.scrollTo({top:0,behavior:"smooth"})}
+render();
+</script></body></html>
